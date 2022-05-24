@@ -2,6 +2,7 @@ import random
 import pen_function
 import direction_function
 import itertools
+import time
 
 # [name, pen_ability]
 team_1 = [
@@ -60,6 +61,8 @@ score_difference = 0
 # Loop through each of the first 10 takers (5 on each team)
 for player in penalty_order[:10]:
 
+	time.sleep(2)
+
 	# Team 1 faces Team 2 goalkeeper and vice versa
 	if player in team_1:
 		gk_ability = t2_gk_ability
@@ -72,8 +75,11 @@ for player in penalty_order[:10]:
 	elif player in team_2:
 		print(f"\n{player[0].title()}, Pen Ability - {player[1]}")
 
+	time.sleep(1)
+
 	# Determine the shot/save directions and result of the penalty
 	shot_direction, save_direction = direction_function.shot_direction()
+	time.sleep(0.8)
 	pen_result = pen_function.pen_result(shot_direction, save_direction, player, gk_ability)
 
 	# Print the result and uupdate the score/number of pens taken
@@ -113,6 +119,9 @@ if team_1_score == team_2_score:
 
 	# Loop through the takers infinitely until the win condition is met
 	for player in itertools.cycle(pen_order_sudden_death):
+
+		time.sleep(2)
+
 		if player in team_1:
 			gk_ability = t2_gk_ability
 		elif player in team_2:
@@ -121,7 +130,11 @@ if team_1_score == team_2_score:
 			print(f"\n\n\n{player[0].title()}, Pen Ability - {player[1]}")
 		elif player in team_2:
 			print(f"\n{player[0].title()}, Pen Ability - {player[1]}")
+
+		time.sleep(1)
+
 		shot_direction, save_direction = direction_function.shot_direction()
+		time.sleep(0.8)
 		pen_result = pen_function.pen_result(shot_direction, save_direction, player, gk_ability)
 		if player in team_1 and pen_result == 'goal':
 			team_1_score += 1
